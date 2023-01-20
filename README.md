@@ -13,12 +13,9 @@ In addition it is required to create **launch file**, which is used to start the
 
 Installing and running
 ----------------------
-For start the whole program, you have to do some several, but fundamental, step. First of all it is important to have **ROS noetic** version on your pc; the best simple suggestion is to have the [**Docker**](https://docs.docker.com/get-docker/) and then follow this [**ROS guide**](http://wiki.ros.org/ROS/Installation). Then you have to clone two different repository:
+For start the whole program, you have to do some several, but fundamental, step. First of all it is important to have **ROS noetic** version on your pc; the best simple suggestion is to have the [**Docker**](https://docs.docker.com/get-docker/) and then follow this [**ROS guide**](http://wiki.ros.org/ROS/Installation).
 
-* The first one is for the [**Gazebo** action server](https://github.com/CarmineD8/assignment_2_2022), that moves the robot in the simulation, thanks to bug0 algorithm; 
-* The second one is mine, that allows you to do what is already explained in the description of the assignment;
-
-You can do it by clicking on the terminal ```git clone link```, where link is the link of the repository. Once you have done this for both repository, you have to put the two pakages in your wokspace; the [workspace tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) tells you how you can do that; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of your wokspace, use the command ```catkin_make``` for building everything.\
+You can clone my repository by clicking on the terminal ```git clone link```, where link is the link of the repository. Once you have done that, you have to put the two pakages in your wokspace; on [wiki.ros.org](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) you can find how can do create your own workspace; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of it, use the command ```catkin_make``` for building everything.\
 If everything works properly, you can launch the simulation; you must launch firstly the action server, by writing on the terminal ```roslaunch assignment_2_2002 assignment1.launch```, and you can see the spawing of two windows: one is **Gazebo** window, the other one is **Rviz**.
 
 Now you can launch my program, by doing a similar thing: click on terminal ```roslaunch following_goal following_goal.launch```, and it is possible two see four windows; the only one you can interact is the one that tells you to choose one of four option on the menu.
