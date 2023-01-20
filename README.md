@@ -1,4 +1,5 @@
-# Rt1_assignment2
+Second assignment
+================================
 
 The aim of this last assignment is to become more familiar with **ROS**, by developing three ( or four if you want) nodes of a given 3D **Gazebo** and **Rviz** simulation.
 The four nodes consist in:
@@ -17,7 +18,7 @@ For start the whole program, you have to do some several, but fundamental, step.
 * The first one is for the [**Gazebo** action server](https://github.com/CarmineD8/assignment_2_2022), that moves the robot in the simulation, thanks to bug0 algorithm; 
 * The second one is mine, that allows you to do what is already explained in the description of the assignment;
 
-You can do it by clicking on the terminal ```git clone link```, where link is the link of the repository. Once you have done this for both repository, you have to put the two pakages in your wokspace; the [workspace tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) tells you how you can do that; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and then use the command ```catkin_make``` for building everything.\
+You can do it by clicking on the terminal ```git clone link```, where link is the link of the repository. Once you have done this for both repository, you have to put the two pakages in your wokspace; the [workspace tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) tells you how you can do that; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of your wokspace, use the command ```catkin_make``` for building everything.\
 If everything works properly, you can launch the simulation; you must launch firstly the action server, by writing on the terminal ```roslaunch assignment_2_2002 assignment1.launch```, and you can see the spawing of two windows: one is **Gazebo** window, the other one is **Rviz**.
 
 Now you can launch my program, by doing a similar thing: click on terminal ```roslaunch following_goal following_goal.launch```, and it is possible two see four windows; the only one you can interact is the one that tells you to choose one of four option on the menu.
@@ -31,7 +32,7 @@ For achieving what i have already explained before, I built four dirrent nodes. 
 * **Set goal node**
 ```
 Function input:
-  Pass as argument answer
+  Pass as argument var answer
   No return values
   Print ""Options: 1) Set goal; 2) Cancell current goal; 3) Number of cancelled or reached goal; 4) Exit; Choose one of it"
   Insert var answer 
@@ -40,52 +41,52 @@ Function input:
 Function number_goals:
   No arguments
   No return values
-  Wait for the service;
-  Call the service
-  SET var reach to the reached value of custome service
-  SET var eliminate to the cancelled value of custome service
+  Call waitForExistence method by object client;
+  Invoke call method by object client, passing as argument the object svr1
+  Assign attribute srv1.response.reached to var reach
+  Assign attribute sr1.response.cancelled to var eliminate
   Print the var reach and eliminate
   
 Function main:
   Call ros init function, with arguments argc, argv and "set_goal"
   Define a NodeHandle
-  Create the action client, by passing "/reaching_goal" and true
+  Create the action client, passing "/reaching_goal" and true
   Define var answer
   SET var set_goal to 0
-  Define var goal
+  Define object goal
   Print "Waiting for action server to start"
-  Call waitForServer function
-  WHILE true:
-    Call input function, which has the argument answer
-    Assign asnwer to the return value of input
-    SET var state to the function getState
-    IF set_goal is not 0 and the comparison between "SUCCEEDED" and var state returns 0:
-      Assign var set_goal-1 to var set_goal
+  Call waitForServer method by action client
+  WHILE ros ok function return true:
+    Call input function, passing as argument var answer
+    Assign the return value of input function to var answer
+    SET object state to the return value of method getState
+    IF var set_goal is not 0 and the comparison between "SUCCEEDED" and object state returns 0:
+      Assign set_goal-1 to var set_goal
     ENDIF
     SWITCH of var answer
       CASE when var answer is equal to 1:
-        Assign the return value of getState function to state
-        IF set_goal is not 0 and the comparison between "SUCCEEDED" and var state does not return 0:
+        Assign the return value of getState method to state
+        IF var set_goal is not 0 and the comparison between "SUCCEEDED" and object state does not return 0:
           Print "You have to delete a goal before setting a new one"
         ENDIF
-        IF set_goal is  to 0 and the comparison between "SUCCEEDED" and var state does not return 0:
-          Assign var set_goal-1 to var set_goal
+        IF var set_goal is  to 0 and the comparison between "SUCCEEDED" and object state does not return 0:
+          Assign set_goal-1 to var set_goal
         ENDIF
         ELSE IF var set_goal is 0:
           Print "Insert x, y position\n
           Insert var posx and posy
-          Assign var posx to the var goal.target_pose.pose.position.x
-          Assign var posy to the var goal.target_pose.pose.position.y
-          Call the sendGoal function with argument var goal
+          Assign var posx to the attribute goal.target_pose.pose.position.x
+          Assign var posy to the attribute goal.target_pose.pose.position.y
+          Call the sendGoal method by action client, passing as argument the object goal
         END ELSEIF
        Call the sleep function with argument 1
        TERMINATE
        CASE when var answer is equal to 2:
-        Assign the return value of getState function to var state
-          IF the comparison between "SUCCEEDED" and var state does not return 0:
-            Call cancellGoal function
+         Assign the return value of getState method to object state
+          IF the comparison between "SUCCEEDED" and object state does not return 0:
+            Call cancellGoal method by action client
             Print "Goal has been cancelled"
-            Assign var set_goal-1 to var set_goal
+            Assign set_goal-1 to var set_goal
           ENDIF
           ELSE: 
             Print "All goals have been cancelled: set new one, or exit"
@@ -93,13 +94,13 @@ Function main:
            Call sleep function with argument 1
           TERMINATE 
         CASE when var answer is equal to 3:
-          Assign the return value of serviceClient function, on service /result, to var client
+          Assign the return value of serviceClient method, passing as argument /result, to object client
           Call number_goals function
           Call sleep function with argument 1
           TERMINATE
         CASE when var answer is equal to 4:
           IF var set_goal is not 0:
-            Call cancelGoal function
+            Call cancelGoal function by action client
           ENDIF
           EXIT
           TERMINATE
@@ -111,35 +112,50 @@ Function main:
 Global variables:
   Define var posx
   Define var posy
-  Define reach
-  Define eliminate
+  Define var reach
+  Define var eliminate
+
+Global objects:
+  Define object client 
+  Define object srv1
 ```
 * **Publisher node**
 ```
 Function pos_v_Callback:
   Pass var msg as argument
   No return values
-  SET var rate to 1
-  Print "Robot pos and vel" and the values of var pose.pose.position.x, var pose.pose.position.y, var twist.twist.linear.x, var twist.twist.linear.y, accessed by var msg
-  Assign var pose.pose.position.x, accesed by msg, to posx
-  Assign var pose.pose.position.y, accesed by msg, to posy
-  Assign var twist.twist.linear.x, accesed by msg, to vx
-  Assign var twist.twist.linear.y, accesed by msg, to vy
-  Define var pv
-  Assign var posx to var posx, accessed by pv
-  Assign var posy to var posy, accessed by pv
-  Assign var vx to var velx, accessed by pv
-  Assign var vy to var vely, accessed by pv
-  Call publish method with var pub, passing as argument var pv
+  SET object rate to 1
+  Print "Robot pos and vel" and the values of attribute pose.pose.position.x, attribute pose.pose.position.y, attribute twist.twist.linear.x, attribute twist.twist.linear.y, accessed by var msg
+  Assign attribute pose.pose.position.x, accesed by msg, to var posx
+  Assign attribute pose.pose.position.y, accesed by msg, to var posy
+  Assign attribute twist.twist.linear.x, accesed by msg, to var vx
+  Assign attribute twist.twist.linear.y, accesed by msg, to var vy
+  Define object pv
+  Assign var posx to attribute pv.posx
+  Assign var posy to attribute pv.posy
+  Assign var vx to attribute pv.velx
+  Assign var vy to attribute pv.vely
+  Call publish method, passing as argument objec pv
   
 Function Main:
   Call ros init function, with arguments argc, argv and "robot_publisher"
   Define a NodeHandle
-  Call subscribe method with NodeHandle, passing as argument "/odom", 1 and the function pos_v_Callback
-  Assign the return value of it to var sub
-  Call advertise method with Nodehandle, passing as argument "/info_robot" and 1
-  Assign the return value of it to var pub
+  Call subscribe method passing as argument "/odom", 1 and the function pos_v_Callback
+  Assign the return value of it to object sub
+  Call advertise method, passing as argument "/info_robot" and 1
+  Assign the return value of it to object pub
   Call the method spin
+  
+ Global variables:
+  Define var posx
+  Define var posy
+  Define var vx
+  Define var vy
+ 
+ Global objects:
+  Define object pub
   ```
+Possible improvements
+-------------------------------------
 
 
