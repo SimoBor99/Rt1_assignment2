@@ -20,7 +20,7 @@ If everything works properly, you can launch the simulation; you must launch fir
 
 Now you can launch my program, by doing a similar thing: click on terminal ```roslaunch following_goal following_goal.launch```, and it is possible two see four windows; the only one you can interact is the one that tells you to choose one of four option on the menu.
 
-**Important remark**: before launching my launch file, it is important to install **xterm** terminal; you can do thansk to the command ```apt-get install xterm``` on docker terminal. 
+**Important remark**: before launching my launch file, it is important to install **xterm** terminal; you can do that by using the command ```apt-get install xterm``` on your docker terminal. 
 
 ## Pseudocode
 
