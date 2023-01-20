@@ -108,6 +108,8 @@ Function main:
           Print "Choose something in the menu"
           Call sleep function with argument 1
      END SWITCH
+     Call spinOnce function
+  END WHILE
    
 Global variables:
   Define var posx
@@ -124,7 +126,6 @@ Global objects:
 Function pos_v_Callback:
   Pass var msg as argument
   No return values
-  SET object rate to 1
   Print "Robot pos and vel" and the values of attribute pose.pose.position.x, attribute pose.pose.position.y, attribute twist.twist.linear.x, attribute twist.twist.linear.y, accessed by var msg
   Assign attribute pose.pose.position.x, accesed by msg, to var posx
   Assign attribute pose.pose.position.y, accesed by msg, to var posy
