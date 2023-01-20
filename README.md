@@ -64,27 +64,82 @@ Function main:
     ENDIF
     SWITCH of var answer
       CASE when var answer is equal to 1:
-        Assign the function getState to state
+        Assign the return value of getState function to state
         IF set_goal is not 0 and the comparison between "SUCCEEDED" and var state does not return 0:
           Print "You have to delete a goal before setting a new one"
         ENDIF
         IF set_goal is  to 0 and the comparison between "SUCCEEDED" and var state does not return 0:
           Assign var set_goal-1 to var set_goal
-        END IF
-        ELSE IF var set_goal is 0
+        ENDIF
+        ELSE IF var set_goal is 0:
           Print "Insert x, y position\n
           Insert var posx and posy
           Assign var posx to the var goal.target_pose.pose.position.x
           Assign var posy to the var goal.target_pose.pose.position.y
-          Call the function sendGoal with argument the var goal
-       ENDELSEIF
-       Call the sleep function
+          Call the sendGoal function with argument var goal
+        END ELSEIF
+       Call the sleep function with argument 1
        TERMINATE
        CASE when var answer is equal to 2:
-        Assign the return value of function getState to var state
-          IF the comparison between "SUCCEEDED" and var state does not return 0
-            Call the function cancellGoal
+        Assign the return value of getState function to var state
+          IF the comparison between "SUCCEEDED" and var state does not return 0:
+            Call cancellGoal function
             Print "Goal has been cancelled"
-       
+            Assign var set_goal-1 to var set_goal
+          ENDIF
+          ELSE: 
+            Print "All goals have been cancelled: set new one, or exit"
+          END ELSE
+           Call sleep function with argument 1
+          TERMINATE 
+        CASE when var answer is equal to 3:
+          Assign the return value of serviceClient function, on service /result, to var client
+          Call number_goals function
+          Call sleep function with argument 1
+          TERMINATE
+        CASE when var answer is equal to 4:
+          IF var set_goal is not 0:
+            Call cancelGoal function
+          ENDIF
+          EXIT
+          TERMINATE
+        DEFAULT
+          Print "Choose something in the menu"
+          Call sleep function with argument 1
+     END SWITCH
+   
+Global variables:
+  Define var posx
+  Define var posy
+  Define reach
+  Define eliminate
 ```
+* **Publisher node**
+```
+Function pos_v_Callback:
+  Pass var msg as argument
+  No return values
+  SET var rate to 1
+  Print "Robot pos and vel" and the values of var pose.pose.position.x, var pose.pose.position.y, var twist.twist.linear.x, var twist.twist.linear.y, accessed by var msg
+  Assign var pose.pose.position.x, accesed by msg, to posx
+  Assign var pose.pose.position.y, accesed by msg, to posy
+  Assign var twist.twist.linear.x, accesed by msg, to vx
+  Assign var twist.twist.linear.y, accesed by msg, to vy
+  Define var pv
+  Assign var posx to var posx, accessed by pv
+  Assign var posy to var posy, accessed by pv
+  Assign var vx to var velx, accessed by pv
+  Assign var vy to var vely, accessed by pv
+  Call publish method with var pub, passing as argument var pv
+  
+Function Main:
+  Call ros init function, with arguments argc, argv and "robot_publisher"
+  Define a NodeHandle
+  Call subscribe method with NodeHandle, passing as argument "/odom", 1 and the function pos_v_Callback
+  Assign the return value of it to var sub
+  Call advertise method with Nodehandle, passing as argument "/info_robot" and 1
+  Assign the return value of it to var pub
+  Call the method spin
+  ```
+
 
