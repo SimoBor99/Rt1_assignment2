@@ -4,9 +4,9 @@ The aim of this last assignment is to become more familiar with **ROS**, by deve
 The four nodes consist in:
 
 * A node that allows the user to set a goal position ( x, y coordinates) or cancell it;
-* A node that publish the current robot position ( x, y coordinates) and velocity ( x, y coordinates);
+* A node that publishes the current robot position ( x, y coordinates) and velocity ( x, y coordinates);
 * A service node that prints the number of goals reached and cancelled;
-* A node that print the euclidian distance from the target, and its average speed;
+* A node that prints the euclidian distance from the target, and its average speed;
 
 In addition it is required to create **launch file**, which is used to start the whole program and, pass as parameters, the rate for printing the information of last node.
 
@@ -33,7 +33,7 @@ For achieving what i have already explained before, I built four dirrent nodes. 
 Function input:
   Pass as argument answer
   No return values
-  Print ""Options:\n 1) Set goal;\n 2) Cancell current goal;\n 3) Number of cancelled or reached goal; \n 4) Exit\n Choose one of it\n"
+  Print ""Options: 1) Set goal; 2) Cancell current goal; 3) Number of cancelled or reached goal; 4) Exit; Choose one of it"
   Insert var answer 
   RETURN var answer
   
@@ -63,10 +63,10 @@ Function main:
       Assign var set_goal-1 to var set_goal
     ENDIF
     SWITCH of var answer
-      CASE when aswer is equal to 1:
+      CASE when var answer is equal to 1:
         Assign the function getState to state
         IF set_goal is not 0 and the comparison between "SUCCEEDED" and var state does not return 0:
-          Print "You have to delete a goal before setting a new one\n"
+          Print "You have to delete a goal before setting a new one"
         ENDIF
         IF set_goal is  to 0 and the comparison between "SUCCEEDED" and var state does not return 0:
           Assign var set_goal-1 to var set_goal
@@ -80,6 +80,11 @@ Function main:
        ENDELSEIF
        Call the sleep function
        TERMINATE
+       CASE when var answer is equal to 2:
+        Assign the return value of function getState to var state
+          IF the comparison between "SUCCEEDED" and var state does not return 0
+            Call the function cancellGoal
+            Print "Goal has been cancelled"
        
 ```
 
