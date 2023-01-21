@@ -147,7 +147,7 @@ Function pos_v_Callback:
   Assign var posy to attribute pv.posy
   Assign var vx to attribute pv.velx
   Assign var vy to attribute pv.vely
-  Call publish method, passing as argument objec pv
+  Call publish method, passing as argument object pv
   
 Function Main:
   Call ros init function, with arguments argc, argv and "robot_publisher"
