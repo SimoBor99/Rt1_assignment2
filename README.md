@@ -19,7 +19,7 @@ You can clone my repository by clicking on the terminal
 
 ```git clone https://github.com/SimoBor99/Rt1_assignment2```
 
-Once you have done that, you have to put the two pakages in your wokspace; on [wiki.ros.org](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) you can find how can do create your own workspace; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of it, use the command ```catkin_make``` for building everything.\
+Once you have done that, you have to put the two pakages in your wokspace; on [wiki.ros.org](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) you can find how can create your own workspace; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of it, use the command ```catkin_make``` for building everything.\
 If everything works properly, you can launch the simulation; you must launch firstly the action server, by writing on the terminal ```roslaunch assignment_2_2002 assignment1.launch```, and you can see the spawing of two windows: the **Gazebo** and **Rviz** window.
 
 <table><tr>
