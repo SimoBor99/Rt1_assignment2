@@ -15,7 +15,11 @@ Installing and running
 ----------------------
 For start the whole program, you have to do some several, but fundamental, step. First of all it is important to have **ROS noetic** version on your pc; the best simple suggestion is to have the [**Docker**](https://docs.docker.com/get-docker/) and then follow this [**ROS guide**](http://wiki.ros.org/ROS/Installation).
 
-You can clone my repository by clicking on the terminal ```git clone https://github.com/SimoBor99/Rt1_assignment2```. Once you have done that, you have to put the two pakages in your wokspace; on [wiki.ros.org](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) you can find how can do create your own workspace; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of it, use the command ```catkin_make``` for building everything.\
+You can clone my repository by clicking on the terminal 
+
+```git clone https://github.com/SimoBor99/Rt1_assignment2```
+
+Once you have done that, you have to put the two pakages in your wokspace; on [wiki.ros.org](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) you can find how can do create your own workspace; then you have to put the two pakages, **assignment_2_2022** and **following_goal**, in your src workspace folder, and, inside the root of it, use the command ```catkin_make``` for building everything.\
 If everything works properly, you can launch the simulation; you must launch firstly the action server, by writing on the terminal ```roslaunch assignment_2_2002 assignment1.launch```, and you can see the spawing of two windows: one is **Gazebo** window, the other one is **Rviz**.
 
 Now you can launch my program, by doing a similar thing: click on terminal ```roslaunch following_goal following_goal.launch```, and it is possible two see four windows; the only one you can interact is the one that tells you to choose one of four option on the menu.
@@ -24,7 +28,7 @@ Now you can launch my program, by doing a similar thing: click on terminal ```ro
 
 ## Pseudocode
 
-For achieving what i have already explained before, I built four dirrent nodes. Here I show the pseudocode for the first two: the node for setting the goal and publishing the current position.
+For achieving what i have already explained before, I built four different nodes. Here I show the pseudocode for the first two: the node for setting the goal and publishing the current position.
 
 * **Set goal node**
 ```
@@ -155,5 +159,12 @@ Function Main:
   ```
 Possible improvements
 -------------------------------------
+It is possible to make some improvements to server and client side. Concerinig the **server side**, it could be better:
+* Once the user has set the goal, see it on the Gazebo environment; for istance the goal could be a red or yellow spot in the area, or something else like that;
+* Improving the bug0 algorithm, because some times the robot reaches the corner of the wall, and is not able to move anymore unless you end the simulation or teleport it by using some options in Gazebo;
+
+Concerning the **client side** it could be better:
+* Making the set_goal node more modular; this means delevoping more functions for achieving the same purpouse, but I should pass the action client to the custome server, because in ROS I cannot declare the action client as a global object;
+* Closing not only the menu window when the user press exit, that means option 4 in the menu, but also the remaning threes.
 
 
