@@ -164,7 +164,7 @@ It is possible to make some improvements to server and client side. Concerinig t
 * Improving the bug0 algorithm, because some times the robot reaches the corner of the wall, and is not able to move anymore unless you end the simulation or teleport it by using some options in Gazebo;
 
 Concerning the **client side** it could be better:
-* Making the set_goal node more modular; this means delevoping more functions for achieving the same purpouse, but I should pass the action client to the custome server, because in ROS I cannot declare the action client as a global object;
-* Closing not only the menu window when the user press exit, that means option 4 in the menu, but also the remaning threes.
+* Making the set_goal node more modular; this means developing more functions for achieving the same purpouses, but I should pass the action client to the custome service, because in ROS I cannot declare the former as a global object;
+* Giving the possibility to close not only the menu window when the user press exit, that means option 4 on the menu, but also the remaning others.
 
 
