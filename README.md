@@ -67,7 +67,7 @@ Function main:
   Define object goal
   Print "Waiting for action server to start"
   Call waitForServer method by action client
-  WHILE ros ok function return true:
+  WHILE ros ok function returns true:
     Call input function, passing as argument var answer
     Assign the return value of input function to var answer
     SET object state to the return value of method getState
@@ -171,7 +171,7 @@ Possible improvements
 -------------------------------------
 It is possible to make some improvements to server and client side. Concerinig the **server side**, it could be better:
 * Once the user has set the goal, see it on the Gazebo environment; for istance the goal could be a red or yellow spot in the area, or something else like that;
-* Improving the bug0 algorithm, because some times the robot reaches the corner of the wall, and is not able to move anymore unless you end the simulation or teleport it by using some options in Gazebo;
+* Improving the bug 0 algorithm, because some times the robot reaches the corner of the wall, and is not able to move anymore unless you end the simulation or teleport it by using some options in Gazebo;
 
 Concerning the **client side** it could be better:
 * Making the set_goal node more modular; this means developing more functions for achieving the same purpouses, but I should pass the action client to the custome service, because in ROS I cannot declare the former as a global object;
