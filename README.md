@@ -54,8 +54,8 @@ Function number_goals:
   No return values
   Call waitForExistence method by object client;
   Invoke call method by object client, passing as argument the object svr1
-  Assign attribute srv1.response.reached to var reach
-  Assign attribute sr1.response.cancelled to var eliminate
+  Assign srv1.response.reached to var reach
+  Assign sr1.response.cancelled to var eliminate
   Print the var reach and eliminate
   
 Function main:
