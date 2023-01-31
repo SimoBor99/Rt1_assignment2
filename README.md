@@ -1,5 +1,6 @@
 Second assignment
 ================================
+Simone Borelli s4662264
 
 The aim of this last assignment is to become more familiar with **ROS**, by developing three ( or four if you want) nodes of a given 3D **Gazebo** and **Rviz** simulation.
 The four nodes consist in:
