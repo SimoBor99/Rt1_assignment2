@@ -137,16 +137,16 @@ Global objects:
 Function pos_v_Callback:
   Pass var msg as argument
   No return values
-  Print "Robot pos and vel" and the values of attribute pose.pose.position.x, attribute pose.pose.position.y, attribute twist.twist.linear.x, attribute twist.twist.linear.y, accessed by var msg
+  Print "Robot pos and vel" and the values of attribute pose.pose.position.x, attribute pose.pose.position.y, attribute twist.twist.linear.x, attribute twist.twist.angular.z, accessed by var msg
   Assign attribute pose.pose.position.x, accesed by msg, to var posx
   Assign attribute pose.pose.position.y, accesed by msg, to var posy
   Assign attribute twist.twist.linear.x, accesed by msg, to var vx
-  Assign attribute twist.twist.linear.y, accesed by msg, to var vy
+  Assign attribute twist.twist.angular.z, accesed by msg, to var vz
   Define object pv
   Assign var posx to attribute pv.posx
   Assign var posy to attribute pv.posy
-  Assign var vx to attribute pv.velx
-  Assign var vy to attribute pv.vely
+  Assign var vx to pv.velx
+  Assign var vz to pv.velz
   Call publish method, passing as argument object pv
   
 Function Main:
@@ -162,7 +162,7 @@ Function Main:
   Define var posx
   Define var posy
   Define var vx
-  Define var vy
+  Define var vz
  
  Global objects:
   Define object pub
